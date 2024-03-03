@@ -5,10 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.pbp.orderservice.dto.OrderDto;
 import org.pbp.orderservice.dto.response.ApiResponse;
 import org.pbp.orderservice.enums.OrderStatus;
+import org.pbp.orderservice.feignclient.MessageClient;
 import org.pbp.orderservice.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
-    private final SimpMessagingTemplate messagingTemplate;
+    private final MessageClient messageClient;
 
     @GetMapping
     public ResponseEntity<List<OrderDto>> findAll() {
@@ -38,7 +38,8 @@ public class OrderController {
     public ResponseEntity<OrderDto> save(@RequestBody OrderDto orderDto) {
         log.info("** Order controller: save order *");
         OrderDto newOrder = orderService.save(orderDto);
-        messagingTemplate.convertAndSend("/order/newOrder", newOrder);
+        //messagingTemplate.convertAndSend("/order/newOrder", newOrder);
+        messageClient.sendNewOrder(newOrder);
         return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
     }
 
@@ -53,7 +54,6 @@ public class OrderController {
                                                       @RequestBody OrderStatus orderStatus) {
         log.info("** Order controller: update order status {} *", orderStatus);
         OrderDto updateOrder = orderService.updateOrderStatus(orderId, orderStatus);
-        messagingTemplate.convertAndSend("/order/updateStatus", updateOrder);
         return ResponseEntity.ok(updateOrder);
     }
 

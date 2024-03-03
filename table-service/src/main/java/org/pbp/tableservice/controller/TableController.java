@@ -3,12 +3,10 @@ package org.pbp.tableservice.controller;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.pbp.tableservice.dto.TableDto;
+import org.pbp.tableservice.entity.TableStatus;
 import org.pbp.tableservice.service.TableService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +28,13 @@ public class TableController {
     public ResponseEntity<TableDto> findById(@PathVariable Long tableId) {
         log.info("** Table controller: find table by id *");
         return ResponseEntity.ok(tableService.findById(tableId));
+    }
+
+    @PutMapping("/{tableId}/status")
+    public ResponseEntity<TableDto> updateTableStatus(@PathVariable Long tableId,
+                                                      @RequestBody TableStatus status) {
+        log.info("** Table controller: update table status {} *", status);
+        TableDto updateTable = tableService.updateTableStatus(tableId, status);
+        return ResponseEntity.ok(updateTable);
     }
 }

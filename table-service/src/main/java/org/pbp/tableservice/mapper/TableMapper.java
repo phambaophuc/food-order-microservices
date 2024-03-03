@@ -13,4 +13,13 @@ public interface TableMapper {
                 .numberOfSeats(table.getNumberOfSeats())
                 .build();
     }
+
+    static DiningTable mapToTable(TableDto tableDto) {
+        return DiningTable.builder()
+                .tableId(tableDto.getTableId())
+                .tableNumber(tableDto.getTableNumber())
+                .status(tableDto.getStatus())
+                .numberOfSeats(tableDto.getNumberOfSeats())
+                .build();
+    }
 }

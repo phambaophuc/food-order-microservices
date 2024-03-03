@@ -20,7 +20,7 @@ public class Product {
     @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 500)
     private String description;
 
     @Column(name = "image_url")
