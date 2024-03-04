@@ -1,4 +1,4 @@
-package org.pbp.sendmessageservice;
+package org.pbp.notificationservice;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

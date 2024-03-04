@@ -28,6 +28,10 @@ public class ApiGatewayConfig {
                         .filters(f -> f.filter(CorsFilter::filter))
                         .uri("lb://table-service")
                 )
+                .route(p -> p.path("/api/reviews/**")
+                        .filters(f -> f.filter(CorsFilter::filter))
+                        .uri("lb://review-service")
+                )
                 .route(p -> p
                         .path("/websocket/**")
                         .uri("lb:ws://notification-service/websocket")

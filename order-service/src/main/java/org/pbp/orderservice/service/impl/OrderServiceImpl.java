@@ -45,18 +45,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto update(OrderDto orderDto) {
-        log.info("** Order service: update order *");
-        return OrderMapper.mapToDto(orderRepo.save(OrderMapper.mapToOrder(orderDto)));
-    }
-
-    @Override
     @Transactional
     public OrderDto updateOrderStatus(String orderId, OrderStatus status) {
         log.info("** Order service: update order status *");
         OrderDto orderUpdate = this.findById(orderId);
         orderUpdate.setStatus(status);
-        return this.update(orderUpdate);
+        return OrderMapper.mapToDto(orderRepo.save(OrderMapper.mapToOrder(orderUpdate)));
     }
 
     @Override

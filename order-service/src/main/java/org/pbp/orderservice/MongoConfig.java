@@ -1,4 +1,4 @@
-package org.pbp.orderservice.config;
+package org.pbp.orderservice;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;

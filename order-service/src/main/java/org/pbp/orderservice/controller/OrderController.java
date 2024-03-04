@@ -3,7 +3,7 @@ package org.pbp.orderservice.controller;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.pbp.orderservice.dto.OrderDto;
-import org.pbp.orderservice.dto.response.ApiResponse;
+import org.pbp.orderservice.dto.response.MessageResponse;
 import org.pbp.orderservice.enums.OrderStatus;
 import org.pbp.orderservice.feignclient.MessageClient;
 import org.pbp.orderservice.service.OrderService;
@@ -38,15 +38,8 @@ public class OrderController {
     public ResponseEntity<OrderDto> save(@RequestBody OrderDto orderDto) {
         log.info("** Order controller: save order *");
         OrderDto newOrder = orderService.save(orderDto);
-        //messagingTemplate.convertAndSend("/order/newOrder", newOrder);
         messageClient.sendNewOrder(newOrder);
         return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
-    }
-
-    @PutMapping
-    public ResponseEntity<OrderDto> update(@RequestBody OrderDto orderDto) {
-        log.info("** Order controller: update order *");
-        return ResponseEntity.ok(orderService.update(orderDto));
     }
 
     @PutMapping("/{orderId}/status")
@@ -54,13 +47,14 @@ public class OrderController {
                                                       @RequestBody OrderStatus orderStatus) {
         log.info("** Order controller: update order status {} *", orderStatus);
         OrderDto updateOrder = orderService.updateOrderStatus(orderId, orderStatus);
+        messageClient.sendUpdateStatus(updateOrder);
         return ResponseEntity.ok(updateOrder);
     }
 
     @DeleteMapping("/{orderId}")
-    public ResponseEntity<ApiResponse> deleteById(@PathVariable String orderId) {
+    public ResponseEntity<MessageResponse> deleteById(@PathVariable String orderId) {
         log.info("** Order controller: delete order by id *");
         orderService.deleteById(orderId);
-        return ResponseEntity.ok(new ApiResponse("Deleted Successfully!"));
+        return ResponseEntity.ok(new MessageResponse("Deleted Successfully!"));
     }
 }
