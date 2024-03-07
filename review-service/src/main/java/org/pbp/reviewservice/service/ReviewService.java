@@ -10,4 +10,5 @@ public interface ReviewService {
     ReviewDto findById(String reviewId);
     ReviewDto save(ReviewDto reviewDto);
     void deleteById(String reviewId);
+    List<ReviewDto> findTop6ByOrderByCreatedAtDesc();
 }

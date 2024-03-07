@@ -45,4 +45,13 @@ public class ReviewServiceImpl implements ReviewService {
         log.info("** Review service: delete review by id *");
         reviewRepo.deleteById(reviewId);
     }
+
+    @Override
+    public List<ReviewDto> findTop6ByOrderByCreatedAtDesc() {
+        log.info("** Review service: find top 3 new reviews *");
+        return reviewRepo.findTop6ByOrderByCreatedAtDesc()
+                .stream()
+                .map(ReviewMapper::mapToDto)
+                .collect(Collectors.toList());
+    }
 }

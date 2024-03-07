@@ -25,6 +25,12 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.findAll());
     }
 
+    @GetMapping("/top-6")
+    public ResponseEntity<List<ReviewDto>> findTop6ByOrderByCreatedAtDesc() {
+        log.info("** Review controller: find top 6 new reviews *");
+        return ResponseEntity.ok(reviewService.findTop6ByOrderByCreatedAtDesc());
+    }
+
     @GetMapping("/{reviewId}")
     public ResponseEntity<ReviewDto> findById(@PathVariable String reviewId) {
         log.info("** Review controller: find review by id *");
