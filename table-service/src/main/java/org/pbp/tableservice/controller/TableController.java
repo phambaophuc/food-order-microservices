@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/tables")
+@RequestMapping("/api/v1/tables")
 @AllArgsConstructor
 @Slf4j
 public class TableController {
