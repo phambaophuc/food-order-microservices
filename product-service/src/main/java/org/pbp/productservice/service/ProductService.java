@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ProductService {
     List<ProductDto> findAll();
-    ProductDto findById(Long categoryId);
-    ProductDto save(ProductDto categoryDto);
-    ProductDto update(ProductDto categoryDto);
-    void deleteById(Long categoryId);
+    ProductDto findById(Long productId);
+    ProductDto save(ProductDto productDto);
+    ProductDto update(ProductDto productDto);
+    void deleteById(Long productId);
 }

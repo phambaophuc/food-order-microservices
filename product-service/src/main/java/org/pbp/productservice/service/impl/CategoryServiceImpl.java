@@ -3,6 +3,7 @@ package org.pbp.productservice.service.impl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.pbp.productservice.dto.CategoryDto;
+import org.pbp.productservice.exception.CategoryNotFoundException;
 import org.pbp.productservice.mapper.CategoryMapper;
 import org.pbp.productservice.repository.CategoryRepo;
 import org.pbp.productservice.service.CategoryService;
@@ -32,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
         log.info("** Category service: find category by id *");
         return categoryRepo.findById(categoryId)
                 .map(CategoryMapper::mapToDto)
-                .orElseThrow();
+                .orElseThrow(() -> new CategoryNotFoundException("Category with id " + categoryId + " not found."));
     }
 
     @Override

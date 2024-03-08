@@ -3,6 +3,7 @@ package org.pbp.productservice.service.impl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.pbp.productservice.dto.ProductDto;
+import org.pbp.productservice.exception.ProductNotFoundException;
 import org.pbp.productservice.mapper.ProductMapper;
 import org.pbp.productservice.repository.ProductRepo;
 import org.pbp.productservice.service.ProductService;
@@ -28,28 +29,28 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto findById(Long categoryId) {
+    public ProductDto findById(Long productId) {
         log.info("** Product service: find product by id *");
-        return productRepo.findById(categoryId)
+        return productRepo.findById(productId)
                 .map(ProductMapper::mapToDto)
-                .orElseThrow();
+                .orElseThrow(() -> new ProductNotFoundException("Product with id " + productId + " not found."));
     }
 
     @Override
-    public ProductDto save(ProductDto categoryDto) {
+    public ProductDto save(ProductDto productDto) {
         log.info("** Product service: save product *");
-        return ProductMapper.mapToDto(productRepo.save(ProductMapper.mapToProduct(categoryDto)));
+        return ProductMapper.mapToDto(productRepo.save(ProductMapper.mapToProduct(productDto)));
     }
 
     @Override
-    public ProductDto update(ProductDto categoryDto) {
+    public ProductDto update(ProductDto productDto) {
         log.info("** Product service: update product *");
-        return ProductMapper.mapToDto(productRepo.save(ProductMapper.mapToProduct(categoryDto)));
+        return ProductMapper.mapToDto(productRepo.save(ProductMapper.mapToProduct(productDto)));
     }
 
     @Override
-    public void deleteById(Long categoryId) {
+    public void deleteById(Long productId) {
         log.info("** Product service: delete product by id *");
-        productRepo.deleteById(categoryId);
+        productRepo.deleteById(productId);
     }
 }
