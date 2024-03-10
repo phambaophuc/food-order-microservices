@@ -1,6 +1,7 @@
 package org.pbp.orderservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class OrderDto {
     private Integer tableNumber;
     private OrderStatus status;
 
+    @Schema(implementation = OrderItem.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<OrderItem> items;
 
