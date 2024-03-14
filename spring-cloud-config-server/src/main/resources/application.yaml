@@ -8,4 +8,4 @@ spring:
     config:
       server:
         git:
-          uri: file://E:/Project/SpringBoot/FoodOrderXpress/git-localconfig-repo
+          uri: https://github.com/phambaophuc/config-server
