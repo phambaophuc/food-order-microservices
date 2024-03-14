@@ -21,7 +21,7 @@ public class OrderDto {
     private Integer tableNumber;
     private OrderStatus status;
 
-    @Schema(implementation = OrderItem.class)
+    @Schema(ref = "OrderItem")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<OrderItem> items;
 
