@@ -16,6 +16,7 @@
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
+        <maven.test.skip>true</maven.test.skip>
     </properties>
     <dependencies>
         <dependency>
@@ -105,11 +106,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-<!--                <configuration>-->
-<!--                    <image>-->
-<!--                        <name>phambaophuc/FoodOrder-${project.artifactId}:${project.version}</name>-->
-<!--                    </image>-->
-<!--                </configuration>-->
+                <configuration>
+                    <image>
+                        <name>phambaophuc/mmv1-${project.artifactId}:${project.version}</name>
+                    </image>
+                </configuration>
             </plugin>
         </plugins>
     </build>

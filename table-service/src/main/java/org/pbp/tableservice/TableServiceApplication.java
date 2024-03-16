@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @OpenAPIDefinition(info =
-@Info(title = "Review API", version = "${springdoc.version}", description = "Documentation Review API v1.0"),
+@Info(title = "Table API", version = "${springdoc.version}", description = "Documentation Review API v1.0"),
         servers = @Server(url = "http://localhost:8765/table-service")
 )
 public class TableServiceApplication {

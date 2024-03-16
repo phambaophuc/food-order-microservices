@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @OpenAPIDefinition(info =
-@Info(title = "Table API", version = "${springdoc.version}", description = "Documentation Table API v1.0"),
+@Info(title = "Review API", version = "${springdoc.version}", description = "Documentation Table API v1.0"),
         servers = @Server(url = "http://localhost:8765/review-service")
 )
 public class ReviewServiceApplication {

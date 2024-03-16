@@ -37,8 +37,9 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<OrderDto> save(@RequestBody OrderDto orderDto) {
         log.info("** Order controller: save order *");
-        messageClient.sendNewOrder(orderDto);
-        return new ResponseEntity<>(orderService.save(orderDto), HttpStatus.CREATED);
+        OrderDto newOrder = orderService.save(orderDto);
+        messageClient.sendNewOrder(newOrder);
+        return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
     }
 
     @PutMapping("/{orderId}/status")

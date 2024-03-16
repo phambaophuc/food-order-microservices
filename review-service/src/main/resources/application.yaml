@@ -1,8 +1,21 @@
+server:
+  port: 9002
+  servlet:
+    context-path: /review-service
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+
 spring:
   application:
     name: review-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/fast_food_express_db
   config:
-    import: configserver:http://localhost:8888
+    import: 'optional:configserver:'
 #  profiles:
 #    active: dev
 #  cloud:
@@ -22,3 +35,5 @@ springdoc:
   version: '2.3.0'
   api-docs:
     version: openapi_3_1
+  cache:
+    disabled: true
