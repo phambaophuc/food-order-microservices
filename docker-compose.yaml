@@ -1,7 +1,6 @@
 version: '3.7'
 
 services:
-
 # Product Service
   product-service:
     image: phambaophuc/mmv1-product-service:0.0.1-SNAPSHOT
