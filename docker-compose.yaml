@@ -122,23 +122,10 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     ports:
-      - "3307:3307"
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: fast_food_express_db
-    networks:
-      - my-network
-
-  phpmyadmin:
-    depends_on:
-      - mysqldb
-    image: phpmyadmin:latest
-    restart: always
-    ports:
-      - "8090:80"
-    environment:
-      PMA_HOST: mysqldb
-      MYSQL_ROOT_PASSWORD: 123456
     networks:
       - my-network
 
