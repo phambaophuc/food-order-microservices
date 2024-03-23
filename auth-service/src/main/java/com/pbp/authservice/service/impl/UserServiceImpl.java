@@ -1,5 +1,6 @@
 package com.pbp.authservice.service.impl;
 
+import com.pbp.authservice.dto.UserDto;
 import com.pbp.authservice.dto.request.LoginRequest;
 import com.pbp.authservice.dto.request.SignupRequest;
 import com.pbp.authservice.dto.response.JwtResponse;
@@ -11,17 +12,12 @@ import com.pbp.authservice.repository.RoleRepo;
 import com.pbp.authservice.repository.UserRepo;
 import com.pbp.authservice.service.UserService;
 import com.pbp.authservice.utils.JwtUtils;
+import com.pbp.authservice.utils.UserMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -30,29 +26,25 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
-    private final AuthenticationManager authenticationManager;
     private final PasswordEncoder encoder;
     private final JwtUtils jwtUtils;
 
     @Override
-    public JwtResponse signin(LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+    public JwtResponse login(LoginRequest loginRequest) {
+        UserDto userDto = UserMapper.mapToDto(userRepo.findByUsername(loginRequest.getUsername()).orElseThrow());
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
+        if (!encoder.matches(loginRequest.getPassword(), userDto.getPassword())) {
+            throw new RuntimeException("Incorrect password!");
+        }
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .toList();
+        String accessToken = jwtUtils.generateJwtToken(userDto, userDto.getRoles(), "ACCESS");
+        String refreshToken = jwtUtils.generateJwtToken(userDto, userDto.getRoles(), "REFRESH");
 
-        return new JwtResponse(jwt, userDetails.getUserId(), userDetails.getUsername(), userDetails.getEmail(), roles);
+        return new JwtResponse(accessToken, refreshToken);
     }
 
     @Override
-    public MessageResponse signup(SignupRequest signupRequest) {
+    public MessageResponse register(SignupRequest signupRequest) {
         if (userRepo.existsByUsername(signupRequest.getUsername())) {
             return new MessageResponse("Error: Username is already taken!");
         }

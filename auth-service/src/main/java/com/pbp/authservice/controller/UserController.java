@@ -22,15 +22,15 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<?> signin(@Valid @RequestBody LoginRequest loginRequest) {
         log.info("** User controller: user login **");
-        return ResponseEntity.ok(userService.signin(loginRequest));
+        return ResponseEntity.ok(userService.login(loginRequest));
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/register")
     public ResponseEntity<MessageResponse> signup(@Valid @RequestBody SignupRequest signupRequest) {
         log.info("** User controller: register user **");
-        return new ResponseEntity<>(userService.signup(signupRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.register(signupRequest), HttpStatus.CREATED);
     }
 }

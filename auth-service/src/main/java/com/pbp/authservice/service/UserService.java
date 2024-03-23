@@ -7,7 +7,7 @@ import com.pbp.authservice.dto.response.MessageResponse;
 
 public interface UserService {
 
-    JwtResponse signin(LoginRequest loginRequest);
+    JwtResponse login(LoginRequest loginRequest);
 
-    MessageResponse signup(SignupRequest signupRequest);
+    MessageResponse register(SignupRequest signupRequest);
 }
