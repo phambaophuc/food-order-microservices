@@ -1,6 +1,5 @@
 package org.pbp.apigateway.utils;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-import java.util.Date;
 
 @Component
 public class JwtUtils {
@@ -25,15 +23,7 @@ public class JwtUtils {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public Claims getClaims(String token) {
-        return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
-    }
-
-    public boolean isExpired(String token) {
-        try {
-            return getClaims(token).getExpiration().before(new Date());
-        } catch (Exception e) {
-            return false;
-        }
+    public void validateToken(String token) {
+        Jwts.parser().verifyWith(key).build().parseSignedClaims(token);
     }
 }
