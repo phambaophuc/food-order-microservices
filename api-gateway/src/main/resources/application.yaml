@@ -33,6 +33,7 @@ spring:
           '[/order-service/**]': *corsConfig
           '[/table-service/**]': *corsConfig
           '[/review-service/**]': *corsConfig
+          '[/auth-service/**]': *corsConfig
   config:
     import: 'optional:configserver:'
 
@@ -46,12 +47,13 @@ management:
       probability: 1.0
 
 springdoc:
-  version: '2.3.0'
   api-docs:
     version: openapi_3_1
   swagger-ui:
     use-root-path: true
     urls:
+      - name: auth-service
+        url: /auth-service/v3/api-docs
       - name: product-service
         url: /product-service/v3/api-docs
       - name: order-service

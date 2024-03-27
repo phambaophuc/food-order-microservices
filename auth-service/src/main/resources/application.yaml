@@ -23,6 +23,16 @@ spring:
       ddl-auto: update
     show-sql: true
 
+springdoc:
+  version: '2.3.0'
+  api-docs:
+    version: openapi_3_1
+  cache:
+    disabled: true
+
 jwt:
   secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
   expiration: 86400000
+
+gateway:
+  url: http://localhost:8765
