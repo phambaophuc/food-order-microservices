@@ -3,9 +3,9 @@ package org.pbp.reviewservice.mapper;
 import org.pbp.reviewservice.document.Review;
 import org.pbp.reviewservice.dto.ReviewDto;
 
-public interface ReviewMapper {
+public class ReviewMapper {
 
-    static ReviewDto mapToDto(Review review) {
+    public static ReviewDto mapToDto(Review review) {
         return ReviewDto.builder()
                 .id(review.getId())
                 .customer(review.getCustomer())
@@ -16,7 +16,7 @@ public interface ReviewMapper {
                 .build();
     }
 
-    static Review mapToReview(ReviewDto reviewDto) {
+    public static Review mapToReview(ReviewDto reviewDto) {
         return Review.builder()
                 .id(reviewDto.getId())
                 .customer(reviewDto.getCustomer())

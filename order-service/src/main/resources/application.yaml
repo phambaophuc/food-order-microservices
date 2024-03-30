@@ -21,7 +21,7 @@ spring:
     name: order-service
   data:
     mongodb:
-      uri: mongodb+srv://admin:phambaophuc@mydb.t3eg6sl.mongodb.net/fast_food_express_db
+      uri: mongodb://localhost:27017/fast_food_express_db
   config:
     import: 'optional:configserver:'
 #  profiles:
@@ -34,10 +34,10 @@ logging:
   pattern:
     level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
 
-management:
-  tracing:
-    sampling:
-      probability: 1.0
+#management:
+#  tracing:
+#    sampling:
+#      probability: 1.0
 
 springdoc:
   version: '2.3.0'

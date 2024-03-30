@@ -2,9 +2,12 @@ package org.pbp.reviewservice.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.pbp.reviewservice.client.EmotionPredictionClient;
 import org.pbp.reviewservice.dto.ReviewDto;
 import org.pbp.reviewservice.mapper.ReviewMapper;
 import org.pbp.reviewservice.repository.ReviewRepo;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +19,19 @@ import java.util.stream.Collectors;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepo reviewRepo;
+    private final EmotionPredictionClient emotionClient;
 
     @Override
+    @Cacheable("reviews")
     public List<ReviewDto> findAll() {
         log.info("** Review service: find all reviews *");
         return reviewRepo.findAll()
                 .stream()
-                .map(ReviewMapper::mapToDto)
+                .map(review -> {
+                    ReviewDto reviewDto = ReviewMapper.mapToDto(review);
+                    reviewDto.setEmotion(emotionClient.predictEmotion(review.getComment()));
+                    return reviewDto;
+                })
                 .collect(Collectors.toList());
     }
 
@@ -35,6 +44,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @CacheEvict(value = "reviews", allEntries = true)
     public ReviewDto save(ReviewDto reviewDto) {
         log.info("** Review service: save review *");
         return ReviewMapper.mapToDto(reviewRepo.save(ReviewMapper.mapToReview(reviewDto)));
