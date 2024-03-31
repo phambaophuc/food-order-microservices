@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.pbp.orderservice.dto.OrderDto;
 import org.pbp.orderservice.enums.OrderStatus;
+import org.pbp.orderservice.exception.OrderNotFoundException;
+import org.pbp.orderservice.feignclient.MessageClient;
 import org.pbp.orderservice.mapper.OrderMapper;
 import org.pbp.orderservice.repository.OrderRepo;
 import org.pbp.orderservice.service.OrderService;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepo orderRepo;
+    private final MessageClient messageClient;
 
     @Override
     public List<OrderDto> findAll() {
@@ -34,23 +37,28 @@ public class OrderServiceImpl implements OrderService {
         log.info("** Order service: find order by id *");
         return orderRepo.findById(orderId)
                 .map(OrderMapper::mapToDto)
-                .orElseThrow();
+                .orElseThrow(() -> new OrderNotFoundException("Order not found with id: " + orderId));
     }
 
     @Override
     public OrderDto save(OrderDto orderDto) {
         log.info("** Order service: save order *");
         orderDto.setStatus(OrderStatus.PENDING);
-        return OrderMapper.mapToDto(orderRepo.save(OrderMapper.mapToOrder(orderDto)));
+        OrderDto newOrder = OrderMapper.mapToDto(orderRepo.save(OrderMapper.mapToOrder(orderDto)));
+        messageClient.sendNewOrder(newOrder);
+        return newOrder;
     }
 
     @Override
     @Transactional
     public OrderDto updateOrderStatus(String orderId, OrderStatus status) {
         log.info("** Order service: update order status *");
-        OrderDto orderUpdate = this.findById(orderId);
-        orderUpdate.setStatus(status);
-        return OrderMapper.mapToDto(orderRepo.save(OrderMapper.mapToOrder(orderUpdate)));
+        OrderDto orderDto = this.findById(orderId);
+        orderDto.setStatus(status);
+
+        OrderDto orderUpdate = OrderMapper.mapToDto(orderRepo.save(OrderMapper.mapToOrder(orderDto)));
+        messageClient.sendUpdateStatus(orderUpdate);
+        return orderUpdate;
     }
 
     @Override

@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.pbp.orderservice.dto.OrderDto;
 import org.pbp.orderservice.dto.response.MessageResponse;
 import org.pbp.orderservice.enums.OrderStatus;
-import org.pbp.orderservice.feignclient.MessageClient;
+import org.pbp.orderservice.exception.OrderNotFoundException;
 import org.pbp.orderservice.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,6 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
-    private final MessageClient messageClient;
 
     @GetMapping
     public ResponseEntity<List<OrderDto>> findAll() {
@@ -29,16 +28,19 @@ public class OrderController {
     }
 
     @GetMapping("/{orderId}")
-    public ResponseEntity<OrderDto> findById(@PathVariable String orderId) {
-        log.info("** Order controller: find order by id *");
-        return ResponseEntity.ok(orderService.findById(orderId));
+    public ResponseEntity<?> findById(@PathVariable String orderId) {
+        try {
+            log.info("** Order controller: find order by id *");
+            return ResponseEntity.ok(orderService.findById(orderId));
+        } catch (OrderNotFoundException e) {
+            return new ResponseEntity<>(new MessageResponse("Order not found!"), HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
     public ResponseEntity<OrderDto> save(@RequestBody OrderDto orderDto) {
         log.info("** Order controller: save order *");
         OrderDto newOrder = orderService.save(orderDto);
-        messageClient.sendNewOrder(newOrder);
         return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
     }
 
@@ -47,7 +49,6 @@ public class OrderController {
                                                       @RequestBody OrderStatus orderStatus) {
         log.info("** Order controller: update order status {} *", orderStatus);
         OrderDto updateOrder = orderService.updateOrderStatus(orderId, orderStatus);
-        messageClient.sendUpdateStatus(updateOrder);
         return ResponseEntity.ok(updateOrder);
     }
 

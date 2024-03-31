@@ -8,6 +8,8 @@ import com.pbp.authservice.dto.response.MessageResponse;
 import com.pbp.authservice.entity.ERole;
 import com.pbp.authservice.entity.Role;
 import com.pbp.authservice.entity.User;
+import com.pbp.authservice.exception.EmailAlreadyException;
+import com.pbp.authservice.exception.UsernameAlreadyException;
 import com.pbp.authservice.repository.RoleRepo;
 import com.pbp.authservice.repository.UserRepo;
 import com.pbp.authservice.service.UserService;
@@ -46,11 +48,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public MessageResponse register(SignupRequest signupRequest) {
         if (userRepo.existsByUsername(signupRequest.getUsername())) {
-            return new MessageResponse("Error: Username is already taken!");
+            throw new UsernameAlreadyException("Username is already taken!");
         }
 
         if (userRepo.existsByEmail(signupRequest.getEmail())) {
-            return new MessageResponse("Error: Email is already in use!");
+            throw new EmailAlreadyException("Email is already in use!");
         }
 
         User user = new User(signupRequest.getUsername(), signupRequest.getEmail(),
