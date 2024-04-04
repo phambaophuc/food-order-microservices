@@ -42,7 +42,7 @@ Dự án API này cung cấp các endpoints để quản lý việc đặt đồ
 
 ### Cài đặt và chạy bằng Docker
 
-1. Clone repository này: `git clone https://github.com/your_username/your_project.git`
+1. Clone repository này: `git clone https://github.com/phambaophuc/food-order-microservices.git`
 2. Di chuyển vào thư mục dự án: `cd your_project`
 3. Xây dựng images Docker cho từng dịch vụ: `mvn clean package && docker-compose build`
 4. Khởi động các container Docker: `docker-compose up`
