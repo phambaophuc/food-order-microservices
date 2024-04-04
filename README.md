@@ -1,4 +1,7 @@
-# Tên Dự Án
+# Restaurant Ordering API
+![Spring Boot Version](https://img.shields.io/badge/springboot-3.2.0-green)
+![Java Version](https://img.shields.io/badge/java-17-orange)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 Dự án này là một hệ thống microservice sử dụng Spring Boot, bao gồm các dịch vụ sau:
 - API Gateway
@@ -12,9 +15,9 @@ Dự án này là một hệ thống microservice sử dụng Spring Boot, bao g
 
 ## Mô tả
 
-Dự án này cung cấp một kiến trúc dịch vụ phân tán để quản lý các hoạt động liên quan đến đặt hàng, sản phẩm, đánh giá, và quản lý người dùng.
+Dự án API này cung cấp các endpoints để quản lý việc đặt đồ ăn trong nhà hàng.
 
-## Hướng dẫn cài đặt và chạy
+## Cài đặt và chạy
 
 ### Yêu cầu
 
@@ -50,4 +53,4 @@ Sau khi tất cả các dịch vụ đã được khởi động, bạn có th�
 
 ## Tài liệu
 
-Đọc thêm về các API và các chức năng khác tại [http://localhost:8765/swagger-ui.html](http://localhost:8765/swagger-ui.html).
+Thông tin chi tiết về API, truy cập Swagger UI: [http://localhost:8765/swagger-ui.html](http://localhost:8765/swagger-ui.html)
