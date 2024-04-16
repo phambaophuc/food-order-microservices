@@ -11,7 +11,6 @@ Dự án này là một hệ thống microservice sử dụng Spring Boot, bao g
 - Order Service
 - Product Service
 - Review Service
-- Table Service
 
 ## Mô tả
 
@@ -38,7 +37,6 @@ Dự án API này cung cấp các endpoints để quản lý việc đặt đồ
    - Order Service: `java -jar order-service/target/order-service.jar`
    - Product Service: `java -jar product-service/target/product-service.jar`
    - Review Service: `java -jar review-service/target/review-service.jar`
-   - Table Service: `java -jar table-service/target/table-service.jar`
 
 ### Cài đặt và chạy bằng Docker
 
