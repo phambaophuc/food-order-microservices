@@ -12,13 +12,13 @@
         <module name="spring-cloud-config-server" />
         <module name="api-gateway" />
         <module name="product-service" />
-        <module name="table-service" />
         <module name="order-service" />
         <module name="eureka-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="notification-service" target="17" />
+      <module name="table-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

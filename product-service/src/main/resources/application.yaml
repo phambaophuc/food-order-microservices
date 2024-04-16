@@ -14,7 +14,7 @@ spring:
   application:
     name: product-service
   datasource:
-    url: jdbc:mysql://localhost:3306/fast_food_express_db
+    url: jdbc:mysql://localhost:3306/product-service
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver

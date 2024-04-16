@@ -7,7 +7,6 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -20,17 +19,14 @@ import java.util.Set;
 @Slf4j
 public class JwtUtils {
 
-    @Value("${jwt.secret}")
-    private String jwtSecret;
-
-    @Value("${jwt.expiration}")
-    private String jwtExpiration;
+    private static final String JWT_SECRET = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
+    private static final String JWT_EXPIRATION = "86400000";
 
     private SecretKey key;
 
     @PostConstruct
     private void initKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(this.jwtSecret);
+        byte[] keyBytes = Decoders.BASE64.decode(JWT_SECRET);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
@@ -42,8 +38,8 @@ public class JwtUtils {
         claims.put("roles", roles);
 
         long expMillis = "ACCESS".equalsIgnoreCase(tokenType)
-                ? Long.parseLong(jwtExpiration) * 1000
-                : Long.parseLong(jwtExpiration) * 1000 * 5;
+                ? Long.parseLong(JWT_EXPIRATION) * 1000
+                : Long.parseLong(JWT_EXPIRATION) * 1000 * 5;
 
         final Date now = new Date();
         final Date exp = new Date(now.getTime() + expMillis);

@@ -15,7 +15,7 @@ spring:
     name: order-service
   data:
     mongodb:
-      uri: mongodb://localhost:27017/fast_food_express_db
+      uri: mongodb://localhost:27017/order-service
   config:
     import: 'optional:configserver:'
 #  profiles:
