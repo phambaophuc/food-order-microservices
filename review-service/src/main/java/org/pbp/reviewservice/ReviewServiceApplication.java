@@ -12,7 +12,6 @@ import org.springframework.cache.annotation.EnableCaching;
 @Info(title = "Review API", version = "${springdoc.version}", description = "Documentation Table API v1.0"),
         servers = @Server(url = "http://localhost:8765/review-service")
 )
-@EnableCaching
 public class ReviewServiceApplication {
 
     public static void main(String[] args) {

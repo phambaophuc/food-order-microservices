@@ -40,10 +40,10 @@ public class ApiGatewayConfig {
                         .path("/review-service/**")
                         .uri("lb://review-service")
                 )
-                .route("websocket", r -> r
-                        .path("/websocket/**")
-                        .uri("lb://notification-service/websocket")
-                )
+//                .route("websocket", r -> r
+//                        .path("/websocket/**")
+//                        .uri("lb://notification-service/websocket")
+//                )
                 .build();
     }
 }

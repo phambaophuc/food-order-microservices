@@ -1,4 +1,4 @@
-package org.pbp.reviewservice;
+package org.pbp.reviewservice.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
