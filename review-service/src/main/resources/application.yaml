@@ -34,7 +34,6 @@ logging:
 #      probability: 1.0
 
 springdoc:
-  version: '2.3.0'
   api-docs:
     version: openapi_3_1
   cache:

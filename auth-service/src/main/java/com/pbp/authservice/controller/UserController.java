@@ -3,8 +3,6 @@ package com.pbp.authservice.controller;
 import com.pbp.authservice.dto.request.LoginRequest;
 import com.pbp.authservice.dto.request.SignupRequest;
 import com.pbp.authservice.dto.response.MessageResponse;
-import com.pbp.authservice.exception.EmailAlreadyException;
-import com.pbp.authservice.exception.UsernameAlreadyException;
 import com.pbp.authservice.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -29,12 +27,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<MessageResponse> register(@Valid @RequestBody SignupRequest signupRequest) {
-        try {
-            return new ResponseEntity<>(userService.register(signupRequest), HttpStatus.CREATED);
-        } catch (UsernameAlreadyException e) {
-            return new ResponseEntity<>(new MessageResponse("User already registered!"), HttpStatus.BAD_REQUEST);
-        } catch (EmailAlreadyException e) {
-            return new ResponseEntity<>(new MessageResponse("Email already registered!"), HttpStatus.BAD_REQUEST);
-        }
+        userService.register(signupRequest);
+        return new ResponseEntity<>(new MessageResponse("Successful account registration!"), HttpStatus.CREATED);
     }
 }

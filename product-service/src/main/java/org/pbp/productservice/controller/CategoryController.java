@@ -2,6 +2,7 @@ package org.pbp.productservice.controller;
 
 import lombok.AllArgsConstructor;
 import org.pbp.productservice.dto.CategoryDto;
+import org.pbp.productservice.dto.response.MessageResponse;
 import org.pbp.productservice.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,9 +38,9 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{categoryId}")
-    public ResponseEntity<String> deleteById(@PathVariable Long categoryId) {
+    public ResponseEntity<MessageResponse> deleteById(@PathVariable Long categoryId) {
         categoryService.deleteById(categoryId);
-        return ResponseEntity.ok("Deleted Successfully!");
+        return ResponseEntity.ok(new MessageResponse("Deleted Successfully!"));
     }
 
 }

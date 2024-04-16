@@ -4,11 +4,11 @@ import com.pbp.authservice.dto.UserDto;
 import com.pbp.authservice.dto.request.LoginRequest;
 import com.pbp.authservice.dto.request.SignupRequest;
 import com.pbp.authservice.dto.response.JwtResponse;
-import com.pbp.authservice.dto.response.MessageResponse;
 import com.pbp.authservice.entity.ERole;
 import com.pbp.authservice.entity.Role;
 import com.pbp.authservice.entity.User;
 import com.pbp.authservice.exception.EmailAlreadyException;
+import com.pbp.authservice.exception.RoleNotFoundException;
 import com.pbp.authservice.exception.UsernameAlreadyException;
 import com.pbp.authservice.repository.RoleRepo;
 import com.pbp.authservice.repository.UserRepo;
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public MessageResponse register(SignupRequest signupRequest) {
+    public void register(SignupRequest signupRequest) {
         if (userRepo.existsByUsername(signupRequest.getUsername())) {
             throw new UsernameAlreadyException("Username is already taken!");
         }
@@ -63,17 +63,17 @@ public class UserServiceImpl implements UserService {
 
         if (strRoles == null || strRoles.isEmpty()) {
             Role userRole = roleRepo.findByRoleName(ERole.ROLE_USER.name())
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    .orElseThrow(() -> new RoleNotFoundException("Role is not found!"));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 if (role.equals("admin")) {
                     Role adminRole = roleRepo.findByRoleName(ERole.ROLE_ADMIN.name())
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                            .orElseThrow(() -> new RoleNotFoundException("Role is not found!"));
                     roles.add(adminRole);
                 } else {
                     Role userRole = roleRepo.findByRoleName(ERole.ROLE_USER.name())
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                            .orElseThrow(() -> new RoleNotFoundException("Role is not found!"));
                     roles.add(userRole);
                 }
             });
@@ -81,7 +81,5 @@ public class UserServiceImpl implements UserService {
 
         user.setRoles(roles);
         userRepo.save(user);
-
-        return new MessageResponse("User registered successfully!");
     }
 }

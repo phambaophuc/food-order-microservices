@@ -50,6 +50,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteById(String orderId) {
+        orderRepo.findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException("Order not found with id: " + orderId));
         orderRepo.deleteById(orderId);
     }
 }

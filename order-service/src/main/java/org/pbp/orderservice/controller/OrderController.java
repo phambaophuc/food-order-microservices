@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.pbp.orderservice.dto.OrderDto;
 import org.pbp.orderservice.dto.response.MessageResponse;
 import org.pbp.orderservice.enums.OrderStatus;
-import org.pbp.orderservice.exception.OrderNotFoundException;
 import org.pbp.orderservice.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +25,7 @@ public class OrderController {
 
     @GetMapping("/{orderId}")
     public ResponseEntity<?> findById(@PathVariable String orderId) {
-        try {
-            return ResponseEntity.ok(orderService.findById(orderId));
-        } catch (OrderNotFoundException e) {
-            return new ResponseEntity<>(new MessageResponse("Order not found!"), HttpStatus.NOT_FOUND);
-        }
+        return ResponseEntity.ok(orderService.findById(orderId));
     }
 
     @PostMapping

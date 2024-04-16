@@ -5,25 +5,25 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.Serial;
 
-@ResponseStatus(HttpStatus.CONFLICT)
-public class EmailAlreadyException extends RuntimeException {
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class RoleNotFoundException extends RuntimeException {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public EmailAlreadyException() {
+    public RoleNotFoundException() {
         super();
     }
 
-    public EmailAlreadyException(String message, Throwable cause) {
+    public RoleNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public EmailAlreadyException(String message) {
+    public RoleNotFoundException(String message) {
         super(message);
     }
 
-    public EmailAlreadyException(Throwable cause) {
+    public RoleNotFoundException(Throwable cause) {
         super(cause);
     }
 }
