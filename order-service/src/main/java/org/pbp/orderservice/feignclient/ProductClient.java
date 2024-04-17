@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @LoadBalancerClient(name = "PRODUCT-SERVICE", configuration = LoadBalancerConfig.class)
 public interface ProductClient {
 
-    @GetMapping("/api/v1/products/{productId}")
+    @GetMapping("/product-service/api/v1/products/{productId}")
     ProductDto getProductById(@PathVariable Long productId);
 }
