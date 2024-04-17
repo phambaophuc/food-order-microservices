@@ -6,7 +6,7 @@ services:
     image: phambaophuc/mmv1-product-service:0.0.1-SNAPSHOT
     mem_reservation: 700m
     ports:
-      - "9000:9000"
+      - "8000:8000"
     networks:
       - my-network
     depends_on:
@@ -24,7 +24,7 @@ services:
     image: phambaophuc/mmv1-order-service:0.0.1-SNAPSHOT
     mem_reservation: 700m
     ports:
-      - "9001:9001"
+      - "8010:8010"
     networks:
       - my-network
     depends_on:
@@ -34,14 +34,13 @@ services:
       eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka
       management.zipkin.tracing.endpoint: http://zipkin-server:9411/api/v2/spans
       spring.data.mongodb.uri: mongodb://mongodb:27017/fast_food_express_db
-      service.url.notification: http://notification-service:8800
 
 # Review Service
   review-service:
     image: phambaophuc/mmv1-review-service:0.0.1-SNAPSHOT
     mem_reservation: 700m
     ports:
-      - "9002:9002"
+      - "8020:8020"
     networks:
       - my-network
     depends_on:
