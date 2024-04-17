@@ -23,7 +23,8 @@ public class Order {
     @Id
     private String id;
 
-    private OrderStatus status;
+    @Builder.Default
+    private OrderStatus status = OrderStatus.PENDING;
 
     private List<OrderItem> items;
 

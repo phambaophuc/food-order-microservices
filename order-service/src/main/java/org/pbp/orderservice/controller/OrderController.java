@@ -3,6 +3,7 @@ package org.pbp.orderservice.controller;
 import lombok.AllArgsConstructor;
 import org.pbp.orderservice.dto.OrderDto;
 import org.pbp.orderservice.dto.response.MessageResponse;
+import org.pbp.orderservice.dto.response.OrderResponse;
 import org.pbp.orderservice.enums.OrderStatus;
 import org.pbp.orderservice.service.OrderService;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class OrderController {
     }
 
     @GetMapping("/{orderId}")
-    public ResponseEntity<?> findById(@PathVariable String orderId) {
+    public ResponseEntity<OrderResponse> findById(@PathVariable String orderId) {
         return ResponseEntity.ok(orderService.findById(orderId));
     }
 
