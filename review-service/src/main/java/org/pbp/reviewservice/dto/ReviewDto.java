@@ -16,7 +16,7 @@ public class ReviewDto {
     private String customer;
     private String comment;
     private Integer rating;
-    private String emotion;
+    private Long productId;
     private Date createdAt;
     private Date updatedAt;
 }

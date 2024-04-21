@@ -11,6 +11,7 @@ public class ReviewMapper {
                 .customer(review.getCustomer())
                 .comment(review.getComment())
                 .rating(review.getRating())
+                .productId(review.getProductId())
                 .createdAt(review.getCreatedAt())
                 .updatedAt(review.getUpdatedAt())
                 .build();
@@ -22,6 +23,7 @@ public class ReviewMapper {
                 .customer(reviewDto.getCustomer())
                 .comment(reviewDto.getComment())
                 .rating(reviewDto.getRating())
+                .productId(reviewDto.getProductId())
                 .createdAt(reviewDto.getCreatedAt())
                 .updatedAt(reviewDto.getUpdatedAt())
                 .build();
