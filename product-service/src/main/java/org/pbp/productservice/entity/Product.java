@@ -18,13 +18,13 @@ import java.math.BigDecimal;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productId", unique = true, nullable = false, updatable = false)
-    private Long productId;
+    @Column(name = "id", unique = true, nullable = false, updatable = false)
+    private Long id;
 
-    @Column(name = "product_name")
+    @Column(name = "name")
     @NotBlank(message = "Product name must not be blank")
     @Size(max = 255, message = "Product name must not exceed 255 characters")
-    private String productName;
+    private String name;
 
     @Column(name = "description", length = 500)
     @Size(max = 500, message = "Description must not exceed 500 characters")

@@ -62,17 +62,17 @@ public class UserServiceImpl implements UserService {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null || strRoles.isEmpty()) {
-            Role userRole = roleRepo.findByRoleName(ERole.ROLE_USER.name())
+            Role userRole = roleRepo.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RoleNotFoundException("Role is not found!"));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 if (role.equals("admin")) {
-                    Role adminRole = roleRepo.findByRoleName(ERole.ROLE_ADMIN.name())
+                    Role adminRole = roleRepo.findByName(ERole.ROLE_ADMIN)
                             .orElseThrow(() -> new RoleNotFoundException("Role is not found!"));
                     roles.add(adminRole);
                 } else {
-                    Role userRole = roleRepo.findByRoleName(ERole.ROLE_USER.name())
+                    Role userRole = roleRepo.findByName(ERole.ROLE_USER)
                             .orElseThrow(() -> new RoleNotFoundException("Role is not found!"));
                     roles.add(userRole);
                 }

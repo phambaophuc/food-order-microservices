@@ -7,15 +7,15 @@ public interface CategoryMapper {
 
     static CategoryDto mapToDto(Category category) {
         return CategoryDto.builder()
-                .categoryId(category.getCategoryId())
-                .categoryName(category.getCategoryName())
+                .id(category.getId())
+                .name(category.getName())
                 .build();
     }
 
     static Category mapToCategory(CategoryDto categoryDto) {
         return Category.builder()
-                .categoryId(categoryDto.getCategoryId())
-                .categoryName(categoryDto.getCategoryName())
+                .id(categoryDto.getId())
+                .name(categoryDto.getName())
                 .build();
     }
 }

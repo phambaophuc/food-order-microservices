@@ -32,7 +32,7 @@ public class JwtUtils {
 
     public String generateJwtToken(UserDto user, Set<Role> roles, String tokenType) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", user.getUserId());
+        claims.put("id", user.getId());
         claims.put("username", user.getUsername());
         claims.put("email", user.getEmail());
         claims.put("roles", roles);
@@ -53,21 +53,21 @@ public class JwtUtils {
                 .compact();
     }
 
-//    public boolean validateJwtToken(String authToken) {
-//        try {
-//            Jwts.parser().verifyWith(key).build().parse(authToken);
-//            return true;
-//        } catch (MalformedJwtException e) {
-//            log.error("Invalid JWT token: {}", e.getMessage());
-//        } catch (ExpiredJwtException e) {
-//            log.error("JWT token is expired: {}", e.getMessage());
-//        } catch (UnsupportedJwtException e) {
-//            log.error("JWT token is unsupported: {}", e.getMessage());
-//        } catch (IllegalArgumentException e) {
-//            log.error("JWT claims string is empty: {}", e.getMessage());
-//        }
-//
-//        return false;
-//    }
+    public boolean validateJwtToken(String authToken) {
+        try {
+            Jwts.parser().verifyWith(key).build().parse(authToken);
+            return true;
+        } catch (MalformedJwtException e) {
+            log.error("Invalid JWT token: {}", e.getMessage());
+        } catch (ExpiredJwtException e) {
+            log.error("JWT token is expired: {}", e.getMessage());
+        } catch (UnsupportedJwtException e) {
+            log.error("JWT token is unsupported: {}", e.getMessage());
+        } catch (IllegalArgumentException e) {
+            log.error("JWT claims string is empty: {}", e.getMessage());
+        }
+
+        return false;
+    }
 
 }

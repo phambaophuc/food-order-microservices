@@ -1,17 +1,14 @@
 package org.pbp.orderservice.service;
 
 import org.pbp.orderservice.dto.OrderDto;
-import org.pbp.orderservice.dto.response.OrderResponse;
-import org.pbp.orderservice.enums.OrderStatus;
 
 import java.util.List;
 
 public interface OrderService {
 
     List<OrderDto> findAll();
-//    OrderDto findById(String orderId);
-    OrderResponse findById(String orderId);
+    OrderDto findById(Long orderId);
     OrderDto save(OrderDto orderDto);
-    OrderDto updateOrderStatus(String orderId, OrderStatus status);
-    void deleteById(String orderId);
+    OrderDto update(OrderDto orderDto);
+    void deleteById(Long orderId);
 }

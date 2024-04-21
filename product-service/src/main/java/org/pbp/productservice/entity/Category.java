@@ -20,13 +20,13 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id", unique = true, updatable = false, nullable = false)
-    private Long categoryId;
+    @Column(name = "id", unique = true, updatable = false, nullable = false)
+    private Long id;
 
-    @Column(name = "category_name")
+    @Column(name = "name")
     @NotBlank(message = "Category name must not be blank")
     @Size(max = 50, message = "Category name must not exceed 50 characters")
-    private String categoryName;
+    private String name;
 
     @JsonIgnore
     @OneToMany(mappedBy = "category")

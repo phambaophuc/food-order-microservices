@@ -9,15 +9,15 @@ public interface ProductMapper {
 
     static ProductDto mapToDto(Product product) {
         return ProductDto.builder()
-                .productId(product.getProductId())
-                .productName(product.getProductName())
+                .id(product.getId())
+                .name(product.getName())
                 .description(product.getDescription())
                 .imageUrl(product.getImageUrl())
                 .price(product.getPrice())
                 .categoryDto(
                         CategoryDto.builder()
-                                .categoryId(product.getCategory().getCategoryId())
-                                .categoryName(product.getCategory().getCategoryName())
+                                .id(product.getCategory().getId())
+                                .name(product.getCategory().getName())
                                 .build()
                 )
                 .build();
@@ -25,15 +25,15 @@ public interface ProductMapper {
 
     static Product mapToProduct(ProductDto productDto) {
         return Product.builder()
-                .productId(productDto.getProductId())
-                .productName(productDto.getProductName())
+                .id(productDto.getId())
+                .name(productDto.getName())
                 .description(productDto.getDescription())
                 .imageUrl(productDto.getImageUrl())
                 .price(productDto.getPrice())
                 .category(
                         Category.builder()
-                                .categoryId(productDto.getCategoryDto().getCategoryId())
-                                .categoryName(productDto.getCategoryDto().getCategoryName())
+                                .id(productDto.getCategoryDto().getId())
+                                .name(productDto.getCategoryDto().getName())
                                 .build()
                 )
                 .build();

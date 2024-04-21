@@ -1,12 +1,10 @@
 package org.pbp.orderservice.repository;
 
-import org.pbp.orderservice.document.Order;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.pbp.orderservice.entity.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface OrderRepo extends MongoRepository<Order, String> {
-    List<Order> findByOrderByStatusDesc();
+public interface OrderRepo extends JpaRepository<Order, Long> {
+
 }

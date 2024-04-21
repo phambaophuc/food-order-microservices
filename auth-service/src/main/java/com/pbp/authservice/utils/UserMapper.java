@@ -7,7 +7,7 @@ public interface UserMapper {
 
     static UserDto mapToDto(User user) {
         return UserDto.builder()
-                .userId(user.getUserId())
+                .id(user.getId())
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .email(user.getEmail())

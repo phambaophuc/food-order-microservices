@@ -3,8 +3,6 @@ package org.pbp.orderservice.controller;
 import lombok.AllArgsConstructor;
 import org.pbp.orderservice.dto.OrderDto;
 import org.pbp.orderservice.dto.response.MessageResponse;
-import org.pbp.orderservice.dto.response.OrderResponse;
-import org.pbp.orderservice.enums.OrderStatus;
 import org.pbp.orderservice.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,27 +22,24 @@ public class OrderController {
         return ResponseEntity.ok(orderService.findAll());
     }
 
-    @GetMapping("/{orderId}")
-    public ResponseEntity<OrderResponse> findById(@PathVariable String orderId) {
-        return ResponseEntity.ok(orderService.findById(orderId));
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderDto> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<OrderDto> save(@RequestBody OrderDto orderDto) {
-        OrderDto newOrder = orderService.save(orderDto);
-        return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
+        return new ResponseEntity<>(orderService.save(orderDto), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{orderId}/status")
-    public ResponseEntity<OrderDto> updateOrderStatus(@PathVariable String orderId,
-                                                      @RequestBody OrderStatus orderStatus) {
-        OrderDto updateOrder = orderService.updateOrderStatus(orderId, orderStatus);
-        return ResponseEntity.ok(updateOrder);
+    @PutMapping
+    public ResponseEntity<OrderDto> update(@RequestBody OrderDto orderDto) {
+        return ResponseEntity.ok(orderService.update(orderDto));
     }
 
-    @DeleteMapping("/{orderId}")
-    public ResponseEntity<MessageResponse> deleteById(@PathVariable String orderId) {
-        orderService.deleteById(orderId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<MessageResponse> deleteById(@PathVariable Long id) {
+        orderService.deleteById(id);
         return ResponseEntity.ok(new MessageResponse("Deleted Successfully!"));
     }
 }
