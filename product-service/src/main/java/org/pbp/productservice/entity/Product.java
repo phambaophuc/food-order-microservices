@@ -1,11 +1,7 @@
 package org.pbp.productservice.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.validator.constraints.URL;
 
 import java.math.BigDecimal;
 
@@ -21,22 +17,19 @@ public class Product {
     @Column(name = "id", unique = true, nullable = false, updatable = false)
     private Long id;
 
-    @Column(name = "name")
-    @NotBlank(message = "Product name must not be blank")
-    @Size(max = 255, message = "Product name must not exceed 255 characters")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "description", length = 500)
-    @Size(max = 500, message = "Description must not exceed 500 characters")
     private String description;
 
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity = 0;
+
     @Column(name = "image_url")
-    @NotBlank(message = "Image URL must not be blank")
-    @URL(message = "Image URL must be a valid URL")
     private String imageUrl;
 
-    @Column(name = "price")
-    @Positive(message = "Price must be a positive number")
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
     @ManyToOne

@@ -1,8 +1,6 @@
 package com.pbp.authservice.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,19 +22,13 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank
-    @Size(max = 20)
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, length = 128)
     private String username;
 
-    @NotBlank
-    @Size(max = 50)
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @NotBlank
-    @Size(max = 120)
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 128)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)

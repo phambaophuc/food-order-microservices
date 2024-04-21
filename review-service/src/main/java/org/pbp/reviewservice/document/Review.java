@@ -1,8 +1,5 @@
 package org.pbp.reviewservice.document;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,14 +22,13 @@ public class Review {
     @Id
     private String id;
 
-    @Size(min = 2, max = 30, message = "Customer name must be between 2 and 30 characters")
+    @Field(name = "customer")
     private String customer;
 
-    @Size(max = 1000, message = "Comment must be at most 1000 characters")
+    @Field(name = "comment")
     private String comment;
 
-    @Min(value = 0, message = "Rating must be at least 0")
-    @Max(value = 5, message = "Rating must be at most 5")
+    @Field(name = "rating")
     private Integer rating;
 
     @Field(name = "product_id")
