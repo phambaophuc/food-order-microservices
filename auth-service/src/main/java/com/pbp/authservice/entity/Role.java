@@ -1,5 +1,6 @@
 package com.pbp.authservice.entity;
 
+import com.pbp.authservice.enums.ERole;
 import jakarta.persistence.*;
 import lombok.Data;
 

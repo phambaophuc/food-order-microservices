@@ -17,14 +17,18 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="base-domains" target="17" />
+      <module name="Common" target="17" />
       <module name="notification-service" target="17" />
       <module name="table-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Common" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="auth-service" options="-parameters" />
+      <module name="base-domains" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="notification-service" options="-parameters" />

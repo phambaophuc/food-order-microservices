@@ -1,27 +1,47 @@
 package org.pbp.orderservice.mapper;
 
-import org.pbp.orderservice.dto.OrderDto;
+import org.pbp.orderservice.dto.request.OrderRequest;
+import org.pbp.orderservice.dto.response.OrderResponse;
 import org.pbp.orderservice.entity.Order;
 
-public interface OrderMapper {
+import java.util.stream.Collectors;
 
-    static OrderDto mapToDto(Order order) {
-        return OrderDto.builder()
+public class OrderMapper {
+
+    public static OrderRequest mapToRequest(Order order) {
+        return OrderRequest.builder()
+                .customerId(order.getCustomerId())
+                .totalPrice(order.getTotalPrice())
+                .items(order.getItems()
+                        .stream()
+                        .map(OrderItemMapper::mapToRequest)
+                        .collect(Collectors.toList()))
+                .build();
+    }
+
+    public static OrderResponse mapToResponse(Order order) {
+        return OrderResponse.builder()
                 .id(order.getId())
                 .customerId(order.getCustomerId())
                 .totalPrice(order.getTotalPrice())
                 .status(order.getStatus())
-                .items(order.getItems())
+                .items(order.getItems()
+                        .stream()
+                        .map(OrderItemMapper::mapToResponse)
+                        .collect(Collectors.toList()))
+                .createdAt(order.getCreatedAt())
+                .updatedAt(order.getUpdatedAt())
                 .build();
     }
 
-    static Order mapToOrder(OrderDto orderDto) {
+    public static Order mapToOrder(OrderRequest orderRequest) {
         return Order.builder()
-                .id(orderDto.getId())
-                .customerId(orderDto.getCustomerId())
-                .totalPrice(orderDto.getTotalPrice())
-                .status(orderDto.getStatus())
-                .items(orderDto.getItems())
+                .customerId(orderRequest.getCustomerId())
+                .totalPrice(orderRequest.getTotalPrice())
+                .items(orderRequest.getItems()
+                        .stream()
+                        .map(OrderItemMapper::mapToOrderItem)
+                        .collect(Collectors.toList()))
                 .build();
     }
 }

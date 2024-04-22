@@ -1,9 +1,11 @@
-package org.pbp.reviewservice.service;
+package org.pbp.reviewservice.service.impl;
 
 import lombok.AllArgsConstructor;
-import org.pbp.reviewservice.dto.ReviewDto;
+import org.pbp.reviewservice.dto.request.ReviewRequest;
+import org.pbp.reviewservice.dto.response.ReviewResponse;
 import org.pbp.reviewservice.mapper.ReviewMapper;
 import org.pbp.reviewservice.repository.ReviewRepo;
+import org.pbp.reviewservice.service.ReviewService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,23 +18,23 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepo reviewRepo;
 
     @Override
-    public List<ReviewDto> findAll() {
+    public List<ReviewResponse> findAll() {
         return reviewRepo.findAll()
                 .stream()
-                .map(ReviewMapper::mapToDto)
+                .map(ReviewMapper::mapToResponse)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ReviewDto findById(String reviewId) {
+    public ReviewResponse findById(String reviewId) {
         return reviewRepo.findById(reviewId)
-                .map(ReviewMapper::mapToDto)
+                .map(ReviewMapper::mapToResponse)
                 .orElseThrow();
     }
 
     @Override
-    public ReviewDto save(ReviewDto reviewDto) {
-        return ReviewMapper.mapToDto(reviewRepo.save(ReviewMapper.mapToReview(reviewDto)));
+    public ReviewRequest createReview(ReviewRequest reviewDto) {
+        return ReviewMapper.mapToRequest(reviewRepo.save(ReviewMapper.mapToReview(reviewDto)));
     }
 
     @Override

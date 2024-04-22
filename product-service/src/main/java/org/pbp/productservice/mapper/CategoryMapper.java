@@ -1,21 +1,27 @@
 package org.pbp.productservice.mapper;
 
-import org.pbp.productservice.dto.CategoryDto;
+import org.pbp.productservice.dto.request.CategoryRequest;
+import org.pbp.productservice.dto.response.CategoryResponse;
 import org.pbp.productservice.entity.Category;
 
-public interface CategoryMapper {
+public class CategoryMapper {
 
-    static CategoryDto mapToDto(Category category) {
-        return CategoryDto.builder()
+    public static CategoryRequest mapToRequest(Category category) {
+        return CategoryRequest.builder()
+                .name(category.getName())
+                .build();
+    }
+
+    public static CategoryResponse mapToResponse(Category category) {
+        return CategoryResponse.builder()
                 .id(category.getId())
                 .name(category.getName())
                 .build();
     }
 
-    static Category mapToCategory(CategoryDto categoryDto) {
+    public static Category mapToCategory(CategoryRequest categoryRequest) {
         return Category.builder()
-                .id(categoryDto.getId())
-                .name(categoryDto.getName())
+                .name(categoryRequest.getName())
                 .build();
     }
 }

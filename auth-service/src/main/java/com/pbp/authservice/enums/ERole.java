@@ -1,4 +1,4 @@
-package com.pbp.authservice.entity;
+package com.pbp.authservice.enums;
 
 public enum ERole {
     ROLE_USER,

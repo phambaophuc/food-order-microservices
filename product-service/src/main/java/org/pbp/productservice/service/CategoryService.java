@@ -1,14 +1,15 @@
 package org.pbp.productservice.service;
 
-import org.pbp.productservice.dto.CategoryDto;
+import org.pbp.productservice.dto.request.CategoryRequest;
+import org.pbp.productservice.dto.response.CategoryResponse;
 
 import java.util.List;
 
 public interface CategoryService {
 
-    List<CategoryDto> findAll();
-    CategoryDto findById(Long categoryId);
-    CategoryDto save(CategoryDto categoryDto);
-    CategoryDto update(CategoryDto categoryDto);
+    List<CategoryResponse> findAll();
+    CategoryResponse findById(Long categoryId);
+    CategoryRequest createCategory(CategoryRequest request);
+    CategoryRequest updateCategory(CategoryRequest request);
     void deleteById(Long categoryId);
 }

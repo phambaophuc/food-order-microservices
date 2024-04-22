@@ -1,9 +1,9 @@
 package org.pbp.productservice.controller;
 
 import lombok.AllArgsConstructor;
-import org.pbp.productservice.dto.ProductDto;
+import org.pbp.productservice.dto.request.ProductRequest;
 import org.pbp.productservice.dto.response.MessageResponse;
-import org.pbp.productservice.exception.ProductNotFoundException;
+import org.pbp.productservice.dto.response.ProductResponse;
 import org.pbp.productservice.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,23 +19,23 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<ProductDto>> findAll() {
+    public ResponseEntity<List<ProductResponse>> findAll() {
         return ResponseEntity.ok(productService.findAll());
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<ProductDto> findById(@PathVariable Long productId) {
+    public ResponseEntity<ProductResponse> findById(@PathVariable Long productId) {
         return ResponseEntity.ok(productService.findById(productId));
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> save(@RequestBody ProductDto productDto) {
-        return new ResponseEntity<>(productService.save(productDto), HttpStatus.CREATED);
+    public ResponseEntity<ProductRequest> createProduct(@RequestBody ProductRequest request) {
+        return new ResponseEntity<>(productService.createProduct(request), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<ProductDto> update(@RequestBody ProductDto productDto) {
-        return ResponseEntity.ok(productService.update(productDto));
+    public ResponseEntity<ProductRequest> updateProduct(@RequestBody ProductRequest request) {
+        return ResponseEntity.ok(productService.updateProduct(request));
     }
 
     @DeleteMapping("/{productId}")

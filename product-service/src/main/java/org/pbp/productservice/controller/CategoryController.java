@@ -1,7 +1,8 @@
 package org.pbp.productservice.controller;
 
 import lombok.AllArgsConstructor;
-import org.pbp.productservice.dto.CategoryDto;
+import org.pbp.productservice.dto.request.CategoryRequest;
+import org.pbp.productservice.dto.response.CategoryResponse;
 import org.pbp.productservice.dto.response.MessageResponse;
 import org.pbp.productservice.service.CategoryService;
 import org.springframework.http.HttpStatus;
@@ -18,23 +19,23 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<CategoryDto>> findAll() {
+    public ResponseEntity<List<CategoryResponse>> findAll() {
         return ResponseEntity.ok(categoryService.findAll());
     }
 
     @GetMapping("/{categoryId}")
-    public ResponseEntity<CategoryDto> findById(@PathVariable Long categoryId) {
+    public ResponseEntity<CategoryResponse> findById(@PathVariable Long categoryId) {
         return ResponseEntity.ok(categoryService.findById(categoryId));
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDto> save(@RequestBody CategoryDto categoryDto) {
-        return new ResponseEntity<>(categoryService.save(categoryDto), HttpStatus.CREATED);
+    public ResponseEntity<CategoryRequest> createCategory(@RequestBody CategoryRequest request) {
+        return new ResponseEntity<>(categoryService.createCategory(request), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<CategoryDto> update(@RequestBody CategoryDto categoryDto) {
-        return ResponseEntity.ok(categoryService.update(categoryDto));
+    public ResponseEntity<CategoryRequest> updateCategory(@RequestBody CategoryRequest request) {
+        return ResponseEntity.ok(categoryService.updateCategory(request));
     }
 
     @DeleteMapping("/{categoryId}")

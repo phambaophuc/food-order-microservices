@@ -1,11 +1,11 @@
-package com.pbp.authservice.utils;
+package com.pbp.authservice.mapper;
 
 import com.pbp.authservice.dto.UserDto;
 import com.pbp.authservice.entity.User;
 
-public interface UserMapper {
+public class UserMapper {
 
-    static UserDto mapToDto(User user) {
+    public static UserDto mapToDto(User user) {
         return UserDto.builder()
                 .id(user.getId())
                 .username(user.getUsername())

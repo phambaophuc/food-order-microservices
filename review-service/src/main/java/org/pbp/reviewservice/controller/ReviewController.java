@@ -1,8 +1,9 @@
 package org.pbp.reviewservice.controller;
 
 import lombok.AllArgsConstructor;
-import org.pbp.reviewservice.dto.ReviewDto;
+import org.pbp.reviewservice.dto.request.ReviewRequest;
 import org.pbp.reviewservice.dto.response.MessageResponse;
+import org.pbp.reviewservice.dto.response.ReviewResponse;
 import org.pbp.reviewservice.service.ReviewService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +19,18 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @GetMapping
-    public ResponseEntity<List<ReviewDto>> findAll() {
+    public ResponseEntity<List<ReviewResponse>> findAll() {
         return ResponseEntity.ok(reviewService.findAll());
     }
 
     @GetMapping("/{reviewId}")
-    public ResponseEntity<ReviewDto> findById(@PathVariable String reviewId) {
+    public ResponseEntity<ReviewResponse> findById(@PathVariable String reviewId) {
         return ResponseEntity.ok(reviewService.findById(reviewId));
     }
 
     @PostMapping
-    public ResponseEntity<ReviewDto> save(@RequestBody ReviewDto reviewDto) {
-        return new ResponseEntity<>(reviewService.save(reviewDto), HttpStatus.CREATED);
+    public ResponseEntity<ReviewRequest> createReview(@RequestBody ReviewRequest request) {
+        return new ResponseEntity<>(reviewService.createReview(request), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{reviewId}")

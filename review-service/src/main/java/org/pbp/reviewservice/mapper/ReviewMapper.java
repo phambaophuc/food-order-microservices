@@ -1,12 +1,22 @@
 package org.pbp.reviewservice.mapper;
 
 import org.pbp.reviewservice.document.Review;
-import org.pbp.reviewservice.dto.ReviewDto;
+import org.pbp.reviewservice.dto.request.ReviewRequest;
+import org.pbp.reviewservice.dto.response.ReviewResponse;
 
 public class ReviewMapper {
 
-    public static ReviewDto mapToDto(Review review) {
-        return ReviewDto.builder()
+    public static ReviewRequest mapToRequest(Review review) {
+        return ReviewRequest.builder()
+                .customer(review.getCustomer())
+                .comment(review.getComment())
+                .rating(review.getRating())
+                .productId(review.getProductId())
+                .build();
+    }
+
+    public static ReviewResponse mapToResponse(Review review) {
+        return ReviewResponse.builder()
                 .id(review.getId())
                 .customer(review.getCustomer())
                 .comment(review.getComment())
@@ -17,15 +27,12 @@ public class ReviewMapper {
                 .build();
     }
 
-    public static Review mapToReview(ReviewDto reviewDto) {
+    public static Review mapToReview(ReviewRequest reviewRequest) {
         return Review.builder()
-                .id(reviewDto.getId())
-                .customer(reviewDto.getCustomer())
-                .comment(reviewDto.getComment())
-                .rating(reviewDto.getRating())
-                .productId(reviewDto.getProductId())
-                .createdAt(reviewDto.getCreatedAt())
-                .updatedAt(reviewDto.getUpdatedAt())
+                .customer(reviewRequest.getCustomer())
+                .comment(reviewRequest.getComment())
+                .rating(reviewRequest.getRating())
+                .productId(reviewRequest.getProductId())
                 .build();
     }
 }

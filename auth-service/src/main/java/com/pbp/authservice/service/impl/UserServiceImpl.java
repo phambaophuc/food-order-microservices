@@ -4,7 +4,7 @@ import com.pbp.authservice.dto.UserDto;
 import com.pbp.authservice.dto.request.LoginRequest;
 import com.pbp.authservice.dto.request.SignupRequest;
 import com.pbp.authservice.dto.response.JwtResponse;
-import com.pbp.authservice.entity.ERole;
+import com.pbp.authservice.enums.ERole;
 import com.pbp.authservice.entity.Role;
 import com.pbp.authservice.entity.User;
 import com.pbp.authservice.exception.EmailAlreadyException;
@@ -14,7 +14,7 @@ import com.pbp.authservice.repository.RoleRepo;
 import com.pbp.authservice.repository.UserRepo;
 import com.pbp.authservice.service.UserService;
 import com.pbp.authservice.utils.JwtUtils;
-import com.pbp.authservice.utils.UserMapper;
+import com.pbp.authservice.mapper.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public JwtResponse login(LoginRequest loginRequest) {
-        UserDto userDto = UserMapper.mapToDto(userRepo.findByUsername(loginRequest.getUsername()).orElseThrow());
+        UserDto userDto = UserMapper.mapToDto(userRepo.findByUsername(loginRequest.getUsername()).orElseThrow(
+                () -> new RuntimeException("User not found!")
+        ));
 
         if (!encoder.matches(loginRequest.getPassword(), userDto.getPassword())) {
             throw new RuntimeException("Incorrect password!");

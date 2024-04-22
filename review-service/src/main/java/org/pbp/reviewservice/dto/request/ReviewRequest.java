@@ -1,4 +1,4 @@
-package org.pbp.reviewservice.dto;
+package org.pbp.reviewservice.dto.request;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -8,15 +8,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReviewDto {
-    private String id;
-
+public class ReviewRequest {
     @Size(min = 2, max = 30, message = "Customer name must be between 2 and 30 characters")
     private String customer;
 
@@ -27,6 +24,4 @@ public class ReviewDto {
     @Max(value = 5, message = "Rating must be at most 5")
     private Integer rating;
     private Long productId;
-    private Date createdAt;
-    private Date updatedAt;
 }

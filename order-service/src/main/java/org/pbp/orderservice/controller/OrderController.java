@@ -1,8 +1,9 @@
 package org.pbp.orderservice.controller;
 
 import lombok.AllArgsConstructor;
-import org.pbp.orderservice.dto.OrderDto;
+import org.pbp.orderservice.dto.request.OrderRequest;
 import org.pbp.orderservice.dto.response.MessageResponse;
+import org.pbp.orderservice.dto.response.OrderResponse;
 import org.pbp.orderservice.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,23 +19,23 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    public ResponseEntity<List<OrderDto>> findAll() {
+    public ResponseEntity<List<OrderResponse>> findAll() {
         return ResponseEntity.ok(orderService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OrderDto> findById(@PathVariable Long id) {
+    public ResponseEntity<OrderResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<OrderDto> save(@RequestBody OrderDto orderDto) {
-        return new ResponseEntity<>(orderService.save(orderDto), HttpStatus.CREATED);
+    public ResponseEntity<OrderRequest> createOrder(@RequestBody OrderRequest request) {
+        return new ResponseEntity<>(orderService.createOrder(request), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<OrderDto> update(@RequestBody OrderDto orderDto) {
-        return ResponseEntity.ok(orderService.update(orderDto));
+    public ResponseEntity<OrderRequest> updateOrder(@RequestBody OrderRequest request) {
+        return ResponseEntity.ok(orderService.updateOrder(request));
     }
 
     @DeleteMapping("/{id}")
