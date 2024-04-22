@@ -7,7 +7,6 @@ Dự án này là một hệ thống microservice sử dụng Spring Boot, bao g
 - API Gateway
 - Eureka Server
 - Auth Service
-- Notification Service
 - Order Service
 - Product Service
 - Review Service
@@ -33,7 +32,6 @@ Dự án API này cung cấp các endpoints để quản lý việc đặt đồ
    - Eureka Server: `java -jar eureka-server/target/eureka-server.jar`
    - API Gateway: `java -jar api-gateway/target/api-gateway.jar`
    - Auth Service: `java -jar auth-service/target/auth-service.jar`
-   - Notification Service: `java -jar notification-service/target/notification-service.jar`
    - Order Service: `java -jar order-service/target/order-service.jar`
    - Product Service: `java -jar product-service/target/product-service.jar`
    - Review Service: `java -jar review-service/target/review-service.jar`
