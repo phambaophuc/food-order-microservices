@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.pbp.orderservice.entity.Order;
 
 import java.math.BigDecimal;
 
@@ -17,5 +16,4 @@ public class OrderItemResponse {
     private Long productId;
     private BigDecimal price;
     private Integer quantity;
-    private Order order;
 }

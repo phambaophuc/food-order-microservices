@@ -23,7 +23,7 @@ public class OrderItem extends TimeStamp {
     private Long productId;
 
     @Column(name = "price", nullable = false)
-    private BigDecimal price = BigDecimal.valueOf(0);
+    private BigDecimal price;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;

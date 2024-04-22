@@ -8,6 +8,7 @@ public class CategoryMapper {
 
     public static CategoryRequest mapToRequest(Category category) {
         return CategoryRequest.builder()
+                .id(category.getId())
                 .name(category.getName())
                 .build();
     }
@@ -21,6 +22,7 @@ public class CategoryMapper {
 
     public static Category mapToCategory(CategoryRequest categoryRequest) {
         return Category.builder()
+                .id(categoryRequest.getId())
                 .name(categoryRequest.getName())
                 .build();
     }

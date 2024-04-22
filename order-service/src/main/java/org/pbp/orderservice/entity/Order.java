@@ -27,7 +27,7 @@ public class Order extends TimeStamp {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private OrderStatus status = OrderStatus.PENDING;
+    private OrderStatus status;
 
     @Column(name = "total_price", nullable = false)
     private BigDecimal totalPrice = new BigDecimal(0);

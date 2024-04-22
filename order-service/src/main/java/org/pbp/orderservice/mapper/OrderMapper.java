@@ -11,7 +11,7 @@ public class OrderMapper {
     public static OrderRequest mapToRequest(Order order) {
         return OrderRequest.builder()
                 .customerId(order.getCustomerId())
-                .totalPrice(order.getTotalPrice())
+                .status(order.getStatus())
                 .items(order.getItems()
                         .stream()
                         .map(OrderItemMapper::mapToRequest)
@@ -37,7 +37,7 @@ public class OrderMapper {
     public static Order mapToOrder(OrderRequest orderRequest) {
         return Order.builder()
                 .customerId(orderRequest.getCustomerId())
-                .totalPrice(orderRequest.getTotalPrice())
+                .status(orderRequest.getStatus())
                 .items(orderRequest.getItems()
                         .stream()
                         .map(OrderItemMapper::mapToOrderItem)

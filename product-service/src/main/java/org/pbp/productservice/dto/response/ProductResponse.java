@@ -18,7 +18,7 @@ public class ProductResponse {
     private String description;
     private String imageUrl;
     private BigDecimal price;
-
+    private Integer quantity;
     @JsonProperty("category")
     private CategoryResponse categoryResponse;
 }

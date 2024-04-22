@@ -20,7 +20,6 @@ public class OrderItemMapper {
                 .productId(orderItem.getProductId())
                 .price(orderItem.getPrice())
                 .quantity(orderItem.getQuantity())
-                .order(orderItem.getOrder())
                 .build();
     }
 

@@ -25,7 +25,6 @@ public class ApiGatewayConfig {
                 )
                 .route("product-service", r -> r
                         .path("/product-service/**")
-                        .filters(f -> f.filter(authFilter.apply(new AuthFilter.Config())))
                         .uri("lb://product-service")
                 )
                 .route("order-service", r -> r

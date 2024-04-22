@@ -24,7 +24,7 @@ public class Product {
     private String description;
 
     @Column(name = "quantity", nullable = false)
-    private Integer quantity = 0;
+    private Integer quantity;
 
     @Column(name = "image_url")
     private String imageUrl;

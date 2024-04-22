@@ -1,6 +1,7 @@
 package org.pbp.orderservice.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,8 @@ public class OrderResponse {
     private Long customerId;
     private OrderStatus status;
     private BigDecimal totalPrice;
+
+    @Schema(ref = "OrderItemResponse")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<OrderItemResponse> items = new ArrayList<>();
     private LocalDate createdAt;

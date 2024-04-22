@@ -12,6 +12,7 @@ public class ProductMapper {
                 .description(product.getDescription())
                 .imageUrl(product.getImageUrl())
                 .price(product.getPrice())
+                .quantity(product.getQuantity())
                 .categoryRequest(CategoryMapper
                         .mapToRequest(product.getCategory()))
                 .build();
@@ -24,6 +25,7 @@ public class ProductMapper {
                 .description(product.getDescription())
                 .imageUrl(product.getImageUrl())
                 .price(product.getPrice())
+                .quantity(product.getQuantity())
                 .categoryResponse(CategoryMapper
                         .mapToResponse(product.getCategory()))
                 .build();
@@ -35,6 +37,7 @@ public class ProductMapper {
                 .description(productRequest.getDescription())
                 .imageUrl(productRequest.getImageUrl())
                 .price(productRequest.getPrice())
+                .quantity(productRequest.getQuantity())
                 .category(CategoryMapper
                         .mapToCategory(productRequest.getCategoryRequest()))
                 .build();

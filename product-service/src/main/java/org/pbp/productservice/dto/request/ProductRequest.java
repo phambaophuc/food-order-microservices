@@ -1,6 +1,5 @@
 package org.pbp.productservice.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +16,6 @@ public class ProductRequest {
     private String description;
     private String imageUrl;
     private BigDecimal price;
-    @JsonProperty("category")
+    private Integer quantity;
     private CategoryRequest categoryRequest;
 }
