@@ -1,4 +1,4 @@
-# Restaurant Ordering API
+# Food Ordering API
 ![Spring Boot Version](https://img.shields.io/badge/springboot-3.2.0-green)
 ![Java Version](https://img.shields.io/badge/java-17-orange)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
